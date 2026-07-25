@@ -1,0 +1,27 @@
+{
+  "name": "md-knowledgebase-app",
+  "version": "1.0.0",
+  "description": "NodeJS and MongoDB application",
+  "license": "ISC",
+  "author": "Mudassar Ansari",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.3.0",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^17.4.2",
+    "express": "^4.15.3",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.2",
+    "mongoose": "^9.7.4",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pug": "^3.0.4"
+  }
+}

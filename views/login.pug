@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1 #{heading}
+    p #{paragraph}
+    hr
+    form(method='POST' action='/users/login')
+        #form-group
+            label Username:
+            input.form-control(type='text', name='username')
+        #form-group
+            label Password:
+            input.form-control(type='password', name='password')           
+        br
+        input.btn.btn-secondary(type='submit', value='Login')

@@ -1,6 +1,6 @@
 async function callDeleteRoute(id) {
     try {
-        const response = await fetch(`http://localhost:5000/articles/${id}`, {
+        const response = await fetch(`https://md-knowledgebase-app.vercel.app/articles/${id}`, {
             method: 'DELETE'
         });
 

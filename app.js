@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const { body, validationResult } = require('express-validator');
 const flash = require('connect-flash')
 const session = require('express-session')
+const MongoDBStore = require('connect-mongodb-session')(session);
 const connectDB = require('./config/database')
 const passport = require('passport');
 const initializePassport = require('./config/passport');
@@ -34,11 +35,45 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 
 //session middleware
+
+// app.use(session({
+//     secret: 'keyboard cat',
+//     resave: true,
+//     saveUninitialized: true
+// }))
+
+const store = new MongoDBStore({
+    uri: process.env.MONGODB_URI,
+    databaseName:'nodekb',
+    collection: 'nodekbSessions'
+});
+
+// Catch errors
+store.on('error', function (error) {
+    console.log('MongoDB Store Error:', error);
+});
+// 1. Enable CORS for your specific frontend domain with credentials allowed
+// app.use(cors({
+//   origin: 'https://vercel.app',
+//   credentials: true
+// }));
+
+// 2. Trust the Vercel reverse proxy
+app.set('trust proxy', 1);
+
+// 3. Define the session middleware
 app.use(session({
-    secret: 'keyboard cat',
+    secret: process.env.SESSION_SECRET,
+    store: store,
     resave: true,
-    saveUninitialized: true
-}))
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        secure: true, // Required for HTTPS on Vercel
+        sameSite: 'none', // Required if frontend and backend are on different domains
+        maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week - // maxAge: 1000 * 60 * 60 * 24 // 24 hours
+    }
+}));
 
 // Express Messages Middleware
 app.use(require('connect-flash')());

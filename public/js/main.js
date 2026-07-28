@@ -1,5 +1,9 @@
 async function callDeleteRoute(id) {
     try {
+        // to execute on localhost: uncomment lines 4 to 6 and comment lines 7 to 9
+        //  const response = await fetch(`http://localhost:5000/articles/${id}`, {
+        //     method: 'DELETE'
+        // });
         const response = await fetch(`https://md-knowledgebase-app.vercel.app/articles/${id}`, {
             method: 'DELETE'
         });

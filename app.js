@@ -34,24 +34,25 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 
-//session middleware
-
+//Session middleware - to execute on localhost: uncomment lines 38 to 42 and comment lines 45 to 49, 52 to 54, 63, 66 to 77
 // app.use(session({
 //     secret: 'keyboard cat',
 //     resave: true,
 //     saveUninitialized: true
 // }))
 
+// creation of store for production server
 const store = new MongoDBStore({
     uri: process.env.MONGODB_URI,
     databaseName:'nodekb',
     collection: 'nodekbSessions'
 });
 
-// Catch errors
+// catch errors
 store.on('error', function (error) {
     console.log('MongoDB Store Error:', error);
 });
+
 // 1. Enable CORS for your specific frontend domain with credentials allowed
 // app.use(cors({
 //   origin: 'https://vercel.app',
@@ -108,6 +109,16 @@ app.get('/', async (req, res) => {
     } catch (err) {
         console.log('Article Fetch error', err)
     }
+})
+
+// health check
+app.get('/health', (_req, res) => {
+    const data = {
+        uptime: process.uptime(),
+        message: 'Ok',
+        date: new Date()
+    }
+    res.status(200).send(data)
 })
 
 // Adding different routes

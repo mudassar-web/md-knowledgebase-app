@@ -4,10 +4,14 @@ html
         title Knowledgebase App
         link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous")
         link(rel='stylesheet' href='/css/style.css')
+        link(rel="icon" type="image/svg+xml" href="/favicon.ico")
+
     body
         nav.navbar.navbar-expand-lg.bg-body-secondary
             .container
-                a.navbar-brand(href='/') Knowledgebase App
+                a.navbar-brand(href='/') 
+                    img(src='/images/MD.png') 
+                    span Knowledgebase App
                 button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
                     span.navbar-toggler-icon
                 #navbarNav.collapse.navbar-collapse
